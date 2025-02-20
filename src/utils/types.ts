@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 export type ListItem = {
   date: string;
   content: string;

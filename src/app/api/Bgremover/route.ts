@@ -25,6 +25,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (!API_KEY) {
+      return NextResponse.json(
+        { error: "API key is not configured" },
+        { status: 500 }
+      );
+    }
+
     // Convert the base64 string to a Blob (assuming a PNG image)
     const imageBlob = base64ToBlob(image_base64, 'image/png');
 
@@ -51,7 +58,7 @@ export async function POST(request: NextRequest) {
         // Do NOT manually set Content-Type; let fetch set the boundary for FormData
       },
       body: formData
-    };
+    } as const; // Use const assertion to ensure type safety
 
     const response = await fetch(url, options);
 

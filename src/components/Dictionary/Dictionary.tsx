@@ -11,15 +11,15 @@ type DictionaryProps = {
 };
 
 const Dictionary = ({ dictionaryResults }: DictionaryProps) => {
-  const animationRefs = useRef<any[]>([]);
+  const animationRefs = useRef<(Player | null)[]>([]);
 
   const handlePlaySound = (audioUrl: string, index: number) => {
     if (audioUrl) {
       const audio = new Audio(audioUrl);
       audio.play();
-      animationRefs.current[index].play();
+      animationRefs.current[index]?.play();
       audio.onended = () => {
-        animationRefs.current[index].pause();
+        animationRefs.current[index]?.pause();
       };
     }
   };
@@ -40,7 +40,9 @@ const Dictionary = ({ dictionaryResults }: DictionaryProps) => {
                     >
                       <Player
                         src={AudioLottie}
-                        ref={(el) => (animationRefs.current[index] = el)}
+                        ref={(el: Player | null) => {
+                          animationRefs.current[index] = el;
+                        }}
                         loop={false}
                         autoplay={false}
                         className={styles.audio}

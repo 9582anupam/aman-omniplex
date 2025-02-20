@@ -4,8 +4,8 @@ import Image from "next/image";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeKatex from "rehype-katex";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { vscDarkPlus as dark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
+import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { Skeleton } from "@nextui-org/skeleton";
 import { Citation } from "@/utils/types";
 
@@ -68,18 +68,21 @@ const Answer = (props: Props) => {
                 const { children, className, node, ...rest } = props;
                 const match = /language-(\w+)/.exec(className || "");
                 return match ? (
-                  <SyntaxHighlighter
-                    PreTag="div"
-                    language={match[1]}
-                    style={dark}
-                    wrapLines={true}
-                    wrapLongLines={true}
-                    customStyle={{
-                      margin: 0,
-                    }}
-                  >
-                    {String(children).replace(/\n$/, "")}
-                  </SyntaxHighlighter>
+                  React.createElement(
+                    SyntaxHighlighter as any,
+                    {
+                      ...rest,
+                      PreTag: "div",
+                      language: match[1],
+                      style: vscDarkPlus,
+                      wrapLines: true,
+                      wrapLongLines: true,
+                      customStyle: {
+                        margin: 0,
+                      }
+                    },
+                    String(children).replace(/\n$/, "")
+                  )
                 ) : (
                   <code className={styles.code}>{children}</code>
                 );

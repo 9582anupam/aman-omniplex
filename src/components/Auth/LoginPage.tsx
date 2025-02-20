@@ -73,7 +73,7 @@ const LoginPage = () => {
       <section className={styles.loginSection}>
         <div className={styles.loginLeft}>
           <h1>Welcome</h1>
-          <p>Let's create your account</p>
+          <p>Let&apos;s create your account</p>
           <div className={styles.loginButton} onClick={handleAuth}>
             {loading ? (
               <>
@@ -95,13 +95,13 @@ const LoginPage = () => {
         </div>
         <div className={styles.loginRight}>
           <div className={styles.animatedTextBlock}>
-            "Experience the power of AI-driven conversations"
+            &quot;Experience the power of AI-driven conversations&quot;
           </div>
           <div className={styles.animatedTextBlock}>
-            "Seamless integration with multiple AI models"
+            &quot;Seamless integration with multiple AI models&quot;
           </div>
           <div className={styles.animatedTextBlock}>
-            "Your personal AI assistant, available 24/7"
+            &quot;Your personal AI assistant, available 24/7&quot;
           </div>
         </div>
       </section>
@@ -124,13 +124,13 @@ const LoginPage = () => {
           </div>
           <div className={styles.loginRight}>
           <div className={styles.animatedTextBlock}>
-            "Experience the power of AI-driven conversations"
+            &quot;Experience the power of AI-driven conversations&quot;
           </div>
           <div className={styles.animatedTextBlock}>
-            "Seamless integration with multiple AI models"
+            &quot;Seamless integration with multiple AI models&quot;
           </div>
           <div className={styles.animatedTextBlock}>
-            "Your personal AI assistant, available 24/7"
+            &quot;Your personal AI assistant, available 24/7&quot;
           </div>
         </div>
         </div>
@@ -142,7 +142,7 @@ const LoginPage = () => {
         <div className={styles.faqItem}>
           <h4>How do I sign in with Google?</h4>
           <p>
-            Simply click the "Continue with Google" button and follow the
+            Simply click the &quot;Continue with Google&quot; button and follow the
             prompts to securely log in using your Google account.
           </p>
         </div>
