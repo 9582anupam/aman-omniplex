@@ -31,7 +31,7 @@ const nextConfig = {
 
     config.resolve.alias = {
       ...config.resolve.alias,
-      'zod': require.resolve('zod')
+      'zod': import.meta.resolve('zod')
     };
 
     // Remove existing rules that might conflict
