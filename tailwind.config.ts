@@ -1,6 +1,9 @@
 import type { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
-const { nextui } = require("@nextui-org/react");
+import { nextui } from "@nextui-org/react";
+import typography from '@tailwindcss/typography';
+import forms from '@tailwindcss/forms';
+import headlessui from '@headlessui/tailwindcss';
 
 const config: Config = {
   content: [
@@ -135,9 +138,9 @@ const config: Config = {
   darkMode: "class",
   plugins: [
     nextui(),
-    require("@tailwindcss/typography"),
-    require("@headlessui/tailwindcss"),
-    require("@tailwindcss/forms"),
+    typography,
+    headlessui,
+    forms,
   ],
 };
 export default config;

@@ -20,7 +20,7 @@ const nextConfig = {
     '@firebase/storage',
     'undici'
   ],
-  webpack: (config, { isServer }) => {
+  webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
       "utf-8-validate": false,
@@ -32,7 +32,7 @@ const nextConfig = {
       !(rule.test && rule.test.toString().includes('.m?js'))
     );
 
-    // Add our new rules
+    // Add new rules
     config.module.rules.push({
       test: /\.m?js/,
       type: 'javascript/auto',
@@ -49,13 +49,13 @@ const nextConfig = {
         /node_modules\/undici/
       ],
       use: {
-        loader: require.resolve('babel-loader'),
+        loader: 'babel-loader',
         options: {
-          presets: [require.resolve('@babel/preset-env')],
+          presets: ['@babel/preset-env'],
           plugins: [
-            [require.resolve('@babel/plugin-proposal-private-methods'), { loose: true }],
-            [require.resolve('@babel/plugin-proposal-private-property-in-object'), { loose: true }],
-            [require.resolve('@babel/plugin-proposal-class-properties'), { loose: true }]
+            ['@babel/plugin-proposal-private-methods', { loose: true }],
+            ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+            ['@babel/plugin-proposal-class-properties', { loose: true }]
           ],
           cacheDirectory: true,
         }
