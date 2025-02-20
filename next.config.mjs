@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 const nextConfig = {
   images: {
@@ -23,7 +25,7 @@ const nextConfig = {
     'zod-to-json-schema',
     '@ai-sdk/ui-utils'
   ],
-  webpack: async (config) => {
+  webpack: (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
       "utf-8-validate": false,
@@ -32,7 +34,8 @@ const nextConfig = {
 
     config.resolve.alias = {
       ...config.resolve.alias,
-      'zod': (await import('zod')).default
+      'zod': require.resolve('zod'),
+      '@ai-sdk/ui-utils': require.resolve('@ai-sdk/ui-utils')
     };
 
     // Remove existing rules that might conflict
