@@ -23,7 +23,7 @@ const nextConfig = {
     'zod-to-json-schema',
     '@ai-sdk/ui-utils'
   ],
-  webpack: (config) => {
+  webpack: async (config) => {
     config.resolve.fallback = {
       ...config.resolve.fallback,
       "utf-8-validate": false,
@@ -32,7 +32,7 @@ const nextConfig = {
 
     config.resolve.alias = {
       ...config.resolve.alias,
-      'zod': require.resolve('zod')
+      'zod': (await import('zod')).default
     };
 
     // Remove existing rules that might conflict
