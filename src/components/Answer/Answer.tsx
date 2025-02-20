@@ -4,7 +4,8 @@ import Image from "next/image";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import rehypeKatex from "rehype-katex";
-import { Light as SyntaxHighlighter } from "react-syntax-highlighter";
+// Change these imports to use CJS paths
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
 import { vscDarkPlus } from "react-syntax-highlighter/dist/cjs/styles/prism";
 import { Skeleton } from "@nextui-org/skeleton";
 import { Citation } from "@/utils/types";

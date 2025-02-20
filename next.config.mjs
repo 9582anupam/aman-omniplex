@@ -18,7 +18,8 @@ const nextConfig = {
     '@firebase/app',
     '@firebase/firestore',
     '@firebase/storage',
-    'undici'
+    'undici',
+    'react-syntax-highlighter'
   ],
   webpack: (config) => {
     config.resolve.fallback = {
@@ -41,12 +42,21 @@ const nextConfig = {
       }
     });
 
+    // Add JSON handling
+    config.module.rules.push({
+      test: /\.json$/,
+      type: 'json',
+    });
+
     config.module.rules.push({
       test: /\.(js|mjs|jsx|ts|tsx)$/,
       include: [
         /node_modules\/firebase/,
         /node_modules\/@firebase/,
-        /node_modules\/undici/
+        /node_modules\/undici/,
+        /node_modules\/react-syntax-highlighter/,
+        /node_modules\/parse-entities/,
+        /node_modules\/character-entities-legacy/
       ],
       use: {
         loader: 'babel-loader',
