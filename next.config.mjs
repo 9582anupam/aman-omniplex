@@ -19,7 +19,9 @@ const nextConfig = {
     '@firebase/firestore',
     '@firebase/storage',
     'undici',
-    'react-syntax-highlighter'
+    'react-syntax-highlighter',
+    'zod',
+    'zod-to-json-schema'
   ],
   webpack: (config) => {
     config.resolve.fallback = {
@@ -56,7 +58,9 @@ const nextConfig = {
         /node_modules\/undici/,
         /node_modules\/react-syntax-highlighter/,
         /node_modules\/parse-entities/,
-        /node_modules\/character-entities-legacy/
+        /node_modules\/character-entities-legacy/,
+        /node_modules\/zod/,
+        /node_modules\/zod-to-json-schema/
       ],
       use: {
         loader: 'babel-loader',
