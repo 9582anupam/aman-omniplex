@@ -18,9 +18,7 @@ const nextConfig = {
     '@firebase/app',
     '@firebase/firestore',
     '@firebase/storage',
-    'undici',
-    '@firebase/storage/dist/index.mjs',
-    '@firebase/storage/dist/node-esm/index.node.esm.js'
+    'undici'
   ],
   webpack: (config, { isServer }) => {
     config.resolve.fallback = {
@@ -28,15 +26,21 @@ const nextConfig = {
       "utf-8-validate": false,
       bufferutil: false,
     };
-    
+
+    // Remove existing rules that might conflict
+    config.module.rules = config.module.rules.filter(rule => 
+      !(rule.test && rule.test.toString().includes('.m?js'))
+    );
+
+    // Add our new rules
     config.module.rules.push({
       test: /\.m?js/,
+      type: 'javascript/auto',
       resolve: {
         fullySpecified: false
       }
     });
 
-    // Add babel-loader for files that need private fields support
     config.module.rules.push({
       test: /\.(js|mjs|jsx|ts|tsx)$/,
       include: [
@@ -45,14 +49,15 @@ const nextConfig = {
         /node_modules\/undici/
       ],
       use: {
-        loader: 'babel-loader',
+        loader: require.resolve('babel-loader'),
         options: {
-          presets: ['@babel/preset-env'],
+          presets: [require.resolve('@babel/preset-env')],
           plugins: [
-            '@babel/plugin-proposal-class-properties',
-            '@babel/plugin-proposal-private-methods',
-            '@babel/plugin-proposal-private-property-in-object'
-          ]
+            [require.resolve('@babel/plugin-proposal-private-methods'), { loose: true }],
+            [require.resolve('@babel/plugin-proposal-private-property-in-object'), { loose: true }],
+            [require.resolve('@babel/plugin-proposal-class-properties'), { loose: true }]
+          ],
+          cacheDirectory: true,
         }
       }
     });
