@@ -20,7 +20,8 @@ const nextConfig = {
     '@firebase/storage',
     'undici',
     'zod',
-    'zod-to-json-schema'
+    'zod-to-json-schema',
+    '@ai-sdk/ui-utils'
   ],
   webpack: (config) => {
     config.resolve.fallback = {
@@ -31,7 +32,7 @@ const nextConfig = {
 
     config.resolve.alias = {
       ...config.resolve.alias,
-      'zod': import.meta.resolve('zod')
+      'zod': require.resolve('zod')
     };
 
     // Remove existing rules that might conflict
@@ -64,7 +65,9 @@ const nextConfig = {
         /node_modules\/parse-entities/,
         /node_modules\/character-entities-legacy/,
         /node_modules\/zod/,
-        /node_modules\/zod-to-json-schema/
+        /node_modules\/zod-to-json-schema/,
+        /node_modules\/@ai-sdk/,
+        /node_modules\/ai/
       ],
       use: {
         loader: 'babel-loader',
