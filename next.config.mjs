@@ -19,7 +19,6 @@ const nextConfig = {
     '@firebase/firestore',
     '@firebase/storage',
     'undici',
-    'react-syntax-highlighter',
     'zod',
     'zod-to-json-schema'
   ],
@@ -28,6 +27,11 @@ const nextConfig = {
       ...config.resolve.fallback,
       "utf-8-validate": false,
       bufferutil: false,
+    };
+
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'zod': require.resolve('zod')
     };
 
     // Remove existing rules that might conflict
